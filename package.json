@@ -1,0 +1,62 @@
+{
+  "name": "easy-chat-desk",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "dist/main.mjs",
+  "scripts": {
+    "electron:dev": "node scripts/dev.mjs",
+    "build:renderer": "vite build",
+    "build:electron": "vite build --config electron.vite.config.ts",
+    "build": "pnpm build:renderer && pnpm build:electron"
+  },
+  "build": {
+    "appId": "com.example.electronapp",
+    "asar": true,
+    "files": [
+      "dist",
+      "dist-electron",
+      "node_modules"
+    ],
+    "directories": {
+      "output": "release"
+    }
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.4",
+    "antd": "^5.24.8",
+    "dotenv": "^16.5.0",
+    "openai": "^4.100.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router": "^7.6.1",
+    "react-router-dom": "^7.6.1",
+    "tailwind-merge": "^3.3.0",
+    "tailwindcss": "^4.1.4",
+    "uuid": "^11.1.0",
+    "zustand": "^5.0.5"
+  },
+  "devDependencies": {
+    "@ant-design/pro-components": "^2.8.7",
+    "@ant-design/x": "^1.4.0",
+    "@eslint/js": "^9.25.0",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@vitejs/plugin-react-swc": "^3.9.0",
+    "ahooks": "^3.8.5",
+    "clsx": "^2.0.0",
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
+    "electron": "^36.3.1",
+    "electron-builder": "^26.0.12",
+    "eslint": "^9.25.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^16.0.0",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.30.1",
+    "vite": "^6.3.5",
+    "vite-plugin-electron": "^0.28.6",
+    "vite-plugin-electron-renderer": "^0.14.5"
+  }
+}
