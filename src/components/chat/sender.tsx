@@ -31,9 +31,9 @@ export default ({customContext}) => {
   const {currentSession, currentSessionID, loading} = useSessionStore()
 
   const [content, setContent] = React.useState('');
+
   useEffect(() => {
-    if (currentSession.length > 0)
-      setShowWelcome(false)
+    setShowWelcome(currentSession.length === 0)
   }, [currentSession]);
 
   useEffect(() => {

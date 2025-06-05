@@ -1,12 +1,11 @@
-import {downloadFileDir, knowledgeBaseRelation} from "./constants";
+import {vectorDir, knowledgeBaseRelation} from "./constants";
 import {createHash} from 'node:crypto'
 import fs from "fs";
 import path from "path";
 import {v4 as uuidv4} from 'uuid'
 
 
-console.log('downloadFileDir', downloadFileDir)
-const fileUuidConfig = path.join(downloadFileDir, '/uuid.json')
+const fileUuidConfig = path.join(vectorDir, '/uuid.json')
 
 
 function writeJson(configPath: string, data: { [k: string]: string }) {
@@ -29,19 +28,17 @@ function getFileHash(content: any) {
 }
 
 export async function uploadFile(_event, filename: string, content: any) {
-  console.log('filename1111', filename, content)
-  ensureDir(downloadFileDir)
+  ensureDir(vectorDir)
   if (!fs.existsSync(fileUuidConfig)) writeJson(fileUuidConfig, {})
 
   const raw = readJson(fileUuidConfig)
-  console.log('uploadFile-raw', raw)
   const fileSHA256 = getFileHash(content)
   if (Object.values(raw).includes(fileSHA256)) {
     return {success: false, msg: `文件上传失败，${filename} 已存在或内容重复`}
   }
 
   const updateRaw = {...raw, [filename]: fileSHA256}
-  fs.writeFileSync(path.join(downloadFileDir, filename), content, 'utf-8')
+  fs.writeFileSync(path.join(vectorDir, filename), content, 'utf-8')
   writeJson(fileUuidConfig, updateRaw)
   console.log('文件上传成功,fileId:', fileSHA256)
 
@@ -50,11 +47,10 @@ export async function uploadFile(_event, filename: string, content: any) {
 
 
 export async function getFileList() {
-  ensureDir(downloadFileDir)
+  ensureDir(vectorDir)
   if (!fs.existsSync(fileUuidConfig)) writeJson(fileUuidConfig, {})
 
   const raw = readJson(fileUuidConfig)
-  console.log('raw', raw)
   return {
     data: Object.keys(raw).map(r => ({name: r})),
     success: true
@@ -75,7 +71,6 @@ export async function getKnowledgeBaseRelationship() {
 
     const raw = readJson(knowledgeBaseRelationPath)
     const values = Array.from(Object.values(raw))
-    console.log('values', Array.isArray(values))
 
     const fileUuidConfigRaw = Object.entries(readJson(fileUuidConfig))
 
@@ -93,10 +88,8 @@ export async function getKnowledgeBaseRelationship() {
       for (const f of r.files) {
         files = [...files, findFileName(f)]
       }
-      console.log('files', files)
       r.files = files
     }
-    console.log('values1111', values)
     return {
       data: values,
       success: true
@@ -117,7 +110,6 @@ export async function createKnowledgeBase(data) {
     if (!fs.existsSync(targetPath)) writeJson(targetPath, {})
 
     const raw = readJson(targetPath)
-    console.log('raw', raw)
     const id = uuidv4()
     const updateRaw = {
       ...raw,
@@ -142,13 +134,11 @@ export async function deleteKnowledgeBaseRelationship(r) {
     if (!fs.existsSync(targetPath)) writeJson(targetPath, {})
 
     const raw = readJson(targetPath)
-    console.log('raw', raw)
     for (const k in raw) {
       if (r.id === raw[k].id) {
         delete raw[k]
       }
     }
-    console.log('raw-after', raw)
 
     writeJson(targetPath, raw)
     return {

@@ -23,6 +23,8 @@
     }
   },
   "dependencies": {
+    "@llamaindex/readers": "^3.1.7",
+    "@llamaindex/workflow": "^1.1.7",
     "@tailwindcss/vite": "^4.1.4",
     "antd": "^5.24.8",
     "dotenv": "^16.5.0",
@@ -40,6 +42,8 @@
     "@ant-design/pro-components": "^2.8.7",
     "@ant-design/x": "^1.4.0",
     "@eslint/js": "^9.25.0",
+    "@llamaindex/huggingface": "^0.1.12",
+    "@llamaindex/openai": "^0.4.3",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react-swc": "^3.9.0",
@@ -53,6 +57,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
+    "llamaindex": "^0.11.6",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.30.1",
     "vite": "^6.3.5",

@@ -109,6 +109,7 @@ export default () => {
       />
       <ProFormUploadButton
         fieldProps={{
+          multiple: true,
           customRequest: fileUpload,
           fileList
         }}
