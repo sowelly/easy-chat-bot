@@ -9,6 +9,7 @@ const userConfigStoreBase = (set: any, get: any) => ({
   apiConfig: {
     MODEL: 'deepseek-ai/DeepSeek-R1-Distill-Qwen-7B',
     BASE_URL: window.mainAPI.get('BASE_URL') || 'https://api.siliconflow.cn/v1',
+    // apikey可以配置在环境变量中通过ipc通信交换，也可以在页面中手动输入
     API_KEY: window.mainAPI.get('API_KEY') || ''
   },
   setApiConfig: (val: string) => set({apiConfig: val}),
