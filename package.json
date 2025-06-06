@@ -8,11 +8,12 @@
     "electron:dev": "node scripts/dev.mjs",
     "build:renderer": "vite build",
     "build:electron": "vite build --config electron.vite.config.ts",
-    "build": "pnpm build:renderer && pnpm build:electron"
+    "build": "pnpm build:renderer && pnpm build:electron",
+    "package": "npm run build && electron-builder build --win"
   },
   "build": {
-    "appId": "com.example.electronapp",
-    "asar": true,
+    "productName": "EasyChatDesk",
+    "appId": "com.easy-chat-desk",
     "files": [
       "dist",
       "dist-electron",
@@ -20,6 +21,10 @@
     ],
     "directories": {
       "output": "release"
+    },
+    "win": {
+      "target": "nsis",
+      "requestedExecutionLevel": "requireAdministrator"
     }
   },
   "dependencies": {
@@ -27,6 +32,7 @@
     "@llamaindex/workflow": "^1.1.7",
     "@tailwindcss/vite": "^4.1.4",
     "antd": "^5.24.8",
+    "canvas": "^3.1.0",
     "dotenv": "^16.5.0",
     "openai": "^4.100.0",
     "react": "^19.1.0",

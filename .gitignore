@@ -13,6 +13,8 @@ dist-ssr
 *.local
 bin
 env.development
+vector-docs
+release
 
 # Editor directories and files
 .vscode/*

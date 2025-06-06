@@ -25,7 +25,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: path.join(ROOT, "electron/main/preload.ts"),
-        preload: path.join(ROOT, "electron/preload/preload.ts"),
+        preload: path.join(ROOT, "electron/main/preload.ts"),
       },
       output: {
         format: "es",
